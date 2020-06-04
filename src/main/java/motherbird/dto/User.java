@@ -28,9 +28,12 @@ public class User {
         // ORMLite needs a no-arg constructor
     }
 
-    public User(Long id, String name) {
+    public User(Long id, String name, Integer age, boolean isMale, String phone) {
         this.id = id;
         this.name = name;
+        this.age = age;
+        this.isMale = isMale;
+        this.phone = phone;
     }
 
     public Long getId() {

@@ -13,16 +13,6 @@ public class UserRepository {
 
     public UserRepository() {
         this.userDao = DatabaseManager.getUserDao();
-
-        // for test
-        try {
-            userDao.create(new User((long)1, "jinkyuhan"));
-            userDao.create(new User((long)2, "kangbinlee"));
-            userDao.create(new User((long)3, "bookjang"));
-            userDao.create(new User((long)4, "comebackhwang"));
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
     }
 
     public static UserRepository getInstance() {

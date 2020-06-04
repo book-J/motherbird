@@ -31,7 +31,7 @@ public class DatabaseManager {
         if (userDao == null) {
             try {
                 userDao = DaoManager.createDao(connectionSource, User.class);
-                TableUtils.dropTable(connectionSource, User.class,true);
+                TableUtils.dropTable(connectionSource, User.class, true); // DEBUG
                 TableUtils.createTableIfNotExists(connectionSource, User.class);
             } catch (SQLException err) {
                 err.printStackTrace();
@@ -44,7 +44,7 @@ public class DatabaseManager {
         if (teamDao == null) {
             try {
                 teamDao = DaoManager.createDao(connectionSource, Team.class);
-                TableUtils.dropTable(connectionSource, Team.class,true);
+                TableUtils.dropTable(connectionSource, Team.class, true); // DEBUG
                 TableUtils.createTableIfNotExists(connectionSource, Team.class);
             } catch (SQLException err) {
                 err.printStackTrace();
@@ -57,7 +57,7 @@ public class DatabaseManager {
         if (activityDao == null) {
             try {
                 activityDao = DaoManager.createDao(connectionSource, Activity.class);
-                TableUtils.dropTable(connectionSource, Activity.class,true);
+                TableUtils.dropTable(connectionSource, Activity.class, true); // DEBUG
                 TableUtils.createTableIfNotExists(connectionSource, Activity.class);
             } catch (SQLException err) {
                 err.printStackTrace();
@@ -71,7 +71,7 @@ public class DatabaseManager {
         if (joinDao == null) {
             try {
                 joinDao = DaoManager.createDao(connectionSource, Join.class);
-                TableUtils.dropTable(connectionSource, Join.class,true);
+                TableUtils.dropTable(connectionSource, Join.class, true);  //DEBUG
                 TableUtils.createTableIfNotExists(connectionSource, Join.class);
             } catch (SQLException err) {
                 err.printStackTrace();
@@ -84,7 +84,7 @@ public class DatabaseManager {
         if (pickDao == null) {
             try {
                 pickDao = DaoManager.createDao(connectionSource, Pick.class);
-                TableUtils.dropTable(connectionSource, Pick.class,true);
+                TableUtils.dropTable(connectionSource, Pick.class, true); // DEBUG
                 TableUtils.createTableIfNotExists(connectionSource, Pick.class);
             } catch (SQLException err) {
                 err.printStackTrace();
