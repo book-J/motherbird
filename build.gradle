@@ -18,24 +18,42 @@ buildscript {
 }
 
 plugins {
-   // Apply the war plugin including java plugin to add support for java web application
-   id 'war'
-//    // Apply the application plugin to add support for building a CLI application.
-   id 'application'
+    // Apply the war plugin including java plugin to add support for java web application
+    id 'war'
+    // Apply the application plugin to add support for building a CLI application.
+    id 'application'
+    // gradle-tomcat plugin
+    id 'com.bmuschko.tomcat' version '2.5'
 }
 
 repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
+    mavenCentral()
 }
 
 dependencies {
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:28.2-jre'
-
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+
+    def tomcatVersion = '8.5.16'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:8.5.2",
+            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+
+    // for ORMLite https://mvnrepository.com/artifact/com.j256.ormlite/
+    compile group: 'com.j256.ormlite', name: 'ormlite-core', version: '5.1'
+    compile group: 'com.j256.ormlite', name: 'ormlite-jdbc', version: '5.1'
+
+    // for SQLite3 https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
+    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.8.11.2'
+
+    // for HttpServlet https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+
 }
 
 application {
@@ -43,22 +61,9 @@ application {
     mainClassName = 'motherbird.App'
 }
 
-apply plugin: 'com.bmuschko.tomcat'
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    def tomcatVersion = '8.5.16'
-    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
-    //       "org.apache.tomcat.embed:tomcat-embed-logging-juli:8.5.2",
-           "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
-}
-
 tomcat {
     httpProtocol = 'org.apache.coyote.http11.Http11Nio2Protocol'
-    ajpProtocol  = 'org.apache.coyote.ajp.AjpNio2Protocol'
+    ajpProtocol = 'org.apache.coyote.ajp.AjpNio2Protocol'
     httpPort = 8080
     stopPort = 8081
     contextPath = '/'
